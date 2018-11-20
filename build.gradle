@@ -25,11 +25,10 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.3.7.Final'
     compile 'com.github.gwenn:sqlite-dialect:0.1.0'
     compile 'org.xerial:sqlite-jdbc:3.25.2'
-    compile 'javax.xml.bind:jaxb-api:2.2.11'
-    compile 'com.xun.xml.bind:jaxb-core:2.2.11'
-    compile 'com.xun.xml.bind:jaxb-impl:2.2.11'
+    compile 'javax.xml.bind:jaxb-api:2.3.0'
+    compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    compile 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
     compile 'javax.activation:activation:1.1.1'
-    compile 'org.postgresql:postgresql:42.2.5'
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 }
@@ -38,5 +37,10 @@ dependencies {
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
+}
+
+jar {
+    baseName 'test'
+    version '1'
 }
