@@ -13,19 +13,5 @@ import java.lang.System;
 public class App {
 
     public static void main(String[] args) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(
-                "test");
-        EntityManager em = factory.createEntityManager();
-        List<A> roots = em.createQuery("select t from A t where parentId = null").getResultList();
-        roots.forEach(System.out::println);
-        var root = new A();
-        root.id = 1;
-        var children = new ArrayList<A>();
-        var c = new A();
-        c.id = 2;
-        c.children = new ArrayList<A>();
-        root.children = new ArrayList<A>();
-        root.children.add(c);
-        em.merge(root);
     }
 }
