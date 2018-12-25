@@ -8,9 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTest {
     EntityManager em;
@@ -37,8 +37,10 @@ public class AppTest {
         var q_ = builder.createQuery(Long.class);
         var root = q_.from(A.class);
         var q = q_.select(root.get("id"));
-        q.where(builder.equal(root.get("parentId"), 1));
-        List<Long> results = em.createQuery(q).getResultList();
-        assertArrayEquals(new Long[]{2L, 3L}, results.toArray());
+        q.where(builder.equal(root.get("parentId"), 1), builder.equal(root.get("order"), 2));
+        List<Long> results = em.createQuery(q).setMaxResults(1).getResultList();
+        assertArrayEquals(new Long[]{3L}, results.toArray());
+        long count = em.createQuery(q.select(builder.count(root))).getSingleResult();
+        assertEquals(count, 1L);
     }
 }
